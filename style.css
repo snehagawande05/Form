@@ -1,147 +1,478 @@
- /* Google Font import kiya modern look ke liye */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-* {
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --accent: #4f46e5;
+    --accent-dark: #3730a3;
+    --accent-light: #eef2ff;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --border-focus: #4f46e5;
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-input: #f8fafc;
+    --success: #10b981;
+    --error: #ef4444;
+    --left-bg: #0f172a;
+    --left-text: rgba(255,255,255,0.85);
+    --left-muted: rgba(255,255,255,0.5);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+    --shadow-focus: 0 0 0 3px rgba(79,70,229,0.15);
+    --transition: 0.2s ease;
+}
+
+html, body {
+    height: 100%;
 }
 
 body {
-    /* Premium Multi-color Vibrant Gradient Background */
-    background: linear-gradient(135deg, #4f46e5, #ec4899, #f43f5e);
-    background-size: 300% 300%;
-    animation: gradientMove 8s ease infinite; /* Background halka-halka move karega */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
     min-height: 100vh;
-    padding: 20px;
+    display: flex;
+    align-items: stretch;
 }
 
-/* Background Animation Logic */
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Form Card Container - Soft Glass Effect */
-.form-container {
-    background-color: #ffffff;
-    padding: 40px 35px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+/* ── Layout ── */
+.page-wrapper {
+    display: flex;
     width: 100%;
-    max-width: 440px;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-height: 100vh;
 }
 
-/* Mouse lane par pura form card smooth bounce/popup hota hai */
-.form-container:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+/* ── Left Panel ── */
+.left-panel {
+    width: 380px;
+    flex-shrink: 0;
+    background: var(--left-bg);
+    background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(79,70,229,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(99,102,241,0.15) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
 }
 
-.form-container h2 {
-    margin-bottom: 25px;
-    color: #1e293b;
-    text-align: center;
+.left-content {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 36px;
+    height: 100%;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 48px;
+}
+
+.brand-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+}
+
+.left-hero {
+    flex: 1;
+}
+
+.left-hero h1 {
     font-size: 28px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    color: #ffffff;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
 }
 
-/* Form Fields Setup */
+.left-hero p {
+    font-size: 15px;
+    color: var(--left-text);
+    line-height: 1.65;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.info-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.7);
+    flex-shrink: 0;
+}
+
+.info-item span {
+    font-size: 14px;
+    color: var(--left-text);
+    font-weight: 500;
+}
+
+.left-footer p {
+    font-size: 12px;
+    color: var(--left-muted);
+}
+
+/* ── Right Panel ── */
+.right-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    background: var(--bg-page);
+}
+
+.form-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    padding: 40px;
+    width: 100%;
+    max-width: 520px;
+}
+
+/* ── Form Header ── */
+.form-header {
+    margin-bottom: 28px;
+}
+
+.form-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.4px;
+    margin-bottom: 6px;
+}
+
+.form-header p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* ── Form Layout ── */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
 .form-group {
     margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    color: #475569;
+    font-size: 13px;
     font-weight: 600;
-    font-size: 14px;
-    transition: color 0.3s;
+    color: var(--text-primary);
+    margin-bottom: 7px;
+    letter-spacing: 0.1px;
 }
 
-/* Input Fields Layout */
-.form-group input, 
+/* ── Inputs ── */
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: color var(--transition);
+}
+
+.textarea-icon {
+    top: 14px;
+    transform: none;
+}
+
+.form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 13px 16px;
-    border: 2px solid #cbd5e1;
-    border-radius: 10px;
-    font-size: 15px;
-    color: #334155;
+    padding: 11px 14px 11px 38px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--bg-input);
     outline: none;
-    background-color: #f8fafc;
-    transition: all 0.3s ease;
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    -webkit-appearance: none;
 }
 
-/* Input field select hone par border glow karegi aur label ka color change hoga */
-.form-group input:focus, 
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+}
+
+.form-group input:focus,
 .form-group textarea:focus {
-    border-color: #4f46e5;
-    background-color: #ffffff;
-    box-shadow: 0 0 12px rgba(79, 70, 229, 0.25);
+    border-color: var(--border-focus);
+    background: #ffffff;
+    box-shadow: var(--shadow-focus);
 }
 
-/* Form group focus hone par label violet ho jaye */
-.form-group:focus-within label {
-    color: #4f46e5;
+.form-group:focus-within .input-icon {
+    color: var(--accent);
 }
 
 .form-group textarea {
     resize: none;
-    height: 95px;
+    height: 110px;
+    padding-top: 11px;
+    line-height: 1.55;
 }
 
-/* Ultra Attractive 3D Pop-up Button */
-button {
+/* ── Submit Button ── */
+button[type="submit"] {
     width: 100%;
-    padding: 15px;
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    color: white;
+    padding: 13px 20px;
+    background: var(--accent);
+    color: #ffffff;
     border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
-    /* Is curve se button spring ki tarah popup hota hai */
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-}
-
-/* Button Hover State - Real Pop-up Animation effect */
-button:hover {
-    transform: translateY(-5px) scale(1.03); /* Button upar ki taraf uchlega aur thoda bada hoga */
-    box-shadow: 0 12px 25px rgba(79, 70, 229, 0.5);
-    background: linear-gradient(135deg, #7c3aed, #4f46e5);
-}
-
-/* Button Click Effect - Andar click hone ka feel dega */
-button:active {
-    transform: translateY(-1px) scale(0.99); /* Click karte hi halka sa niche dabega */
-    box-shadow: 0 5px 10px rgba(79, 70, 229, 0.4);
-}
-
-/* Loading State */
-button:disabled {
-    background: #94a3b8;
-    box-shadow: none;
-    cursor: not-allowed;
-}
-
-/* Success/Error Message Response Alert */
-#response-message {
-    margin-top: 20px;
-    text-align: center;
+    border-radius: var(--radius-sm);
     font-size: 14px;
     font-weight: 600;
+    font-family: inherit;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+button[type="submit"]:hover {
+    background: var(--accent-dark);
+    box-shadow: 0 4px 12px rgba(79,70,229,0.35);
+    transform: translateY(-1px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+button[type="submit"]:disabled {
+    background: var(--text-muted);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-icon { transition: transform var(--transition); }
+button[type="submit"]:hover .btn-icon { transform: translateX(2px) rotate(-5deg); }
+
+.btn-spinner {
+    display: none;
+    animation: spin 0.8s linear infinite;
+}
+
+button[type="submit"].loading .btn-text { display: none; }
+button[type="submit"].loading .btn-icon { display: none; }
+button[type="submit"].loading .btn-spinner { display: block; }
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Response Message ── */
+.response-message {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 20px;
+    padding: 0 4px;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s ease;
+}
+
+.response-message.success {
+    background: #ecfdf5;
+    color: var(--success);
+    padding: 10px 16px;
+    border: 1px solid #a7f3d0;
+}
+
+.response-message.error {
+    background: #fef2f2;
+    color: var(--error);
+    padding: 10px 16px;
+    border: 1px solid #fecaca;
+}
+
+/* ── Responsive ── */
+
+/* Tablet */
+@media (max-width: 900px) {
+    .left-panel {
+        width: 300px;
+    }
+    .left-hero h1 {
+        font-size: 22px;
+    }
+    .form-card {
+        padding: 32px 28px;
+    }
+}
+
+/* Mobile + Tablet stacked (below 768px) */
+@media (max-width: 768px) {
+    body {
+        align-items: flex-start;
+    }
+
+    .page-wrapper {
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .left-panel {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 0;
+    }
+
+    .left-content {
+        padding: 28px 24px 32px;
+        flex-direction: column;
+    }
+
+    .brand {
+        margin-bottom: 24px;
+    }
+
+    .left-hero {
+        flex: unset;
+        margin-bottom: 24px;
+    }
+
+    .left-hero h1 {
+        font-size: 22px;
+    }
+
+    .contact-info {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .info-item {
+        flex: 1 1 auto;
+        min-width: 140px;
+    }
+
+    .left-footer {
+        display: none;
+    }
+
+    .right-panel {
+        padding: 28px 16px 40px;
+        align-items: flex-start;
+    }
+
+    .form-card {
+        padding: 28px 20px;
+        border-radius: var(--radius-md);
+    }
+
+    .form-header h2 {
+        font-size: 19px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+    .left-content {
+        padding: 24px 18px;
+    }
+    .form-card {
+        padding: 24px 16px;
+    }
+    .contact-info {
+        flex-direction: column;
+    }
+}
+
+/* ── Validation Styles ── */
+.input-error {
+    border-color: var(--error) !important;
+    background: #fff8f8 !important;
+}
+
+.input-error:focus {
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.15) !important;
+}
+
+.form-group:has(.input-error) .input-icon {
+    color: var(--error) !important;
+}
+
+.field-error {
+    display: block;
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 5px;
+    font-weight: 500;
+    padding-left: 2px;
+    animation: slideDown 0.18s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
 }

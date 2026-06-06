@@ -1,0 +1,147 @@
+ /* Google Font import kiya modern look ke liye */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    /* Premium Multi-color Vibrant Gradient Background */
+    background: linear-gradient(135deg, #4f46e5, #ec4899, #f43f5e);
+    background-size: 300% 300%;
+    animation: gradientMove 8s ease infinite; /* Background halka-halka move karega */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Background Animation Logic */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Form Card Container - Soft Glass Effect */
+.form-container {
+    background-color: #ffffff;
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 440px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Mouse lane par pura form card smooth bounce/popup hota hai */
+.form-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.form-container h2 {
+    margin-bottom: 25px;
+    color: #1e293b;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Form Fields Setup */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #475569;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+/* Input Fields Layout */
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #334155;
+    outline: none;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+/* Input field select hone par border glow karegi aur label ka color change hoga */
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: #4f46e5;
+    background-color: #ffffff;
+    box-shadow: 0 0 12px rgba(79, 70, 229, 0.25);
+}
+
+/* Form group focus hone par label violet ho jaye */
+.form-group:focus-within label {
+    color: #4f46e5;
+}
+
+.form-group textarea {
+    resize: none;
+    height: 95px;
+}
+
+/* Ultra Attractive 3D Pop-up Button */
+button {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+    /* Is curve se button spring ki tarah popup hota hai */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+/* Button Hover State - Real Pop-up Animation effect */
+button:hover {
+    transform: translateY(-5px) scale(1.03); /* Button upar ki taraf uchlega aur thoda bada hoga */
+    box-shadow: 0 12px 25px rgba(79, 70, 229, 0.5);
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+}
+
+/* Button Click Effect - Andar click hone ka feel dega */
+button:active {
+    transform: translateY(-1px) scale(0.99); /* Click karte hi halka sa niche dabega */
+    box-shadow: 0 5px 10px rgba(79, 70, 229, 0.4);
+}
+
+/* Loading State */
+button:disabled {
+    background: #94a3b8;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Success/Error Message Response Alert */
+#response-message {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}

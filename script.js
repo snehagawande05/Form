@@ -1,5 +1,4 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyVYSEMh5iS7Jr4zcsXSoyBT11Emk5KZZkdRhf51sWqtZCbjysKm_vX_eMc6vxBx1k9NQ/exec';
-
+const scriptURL = 'https://script.google.com/macros/s/AKfycbz_wTKBLINNaPu2msSmDLgUocUJ6Hg4Qcp0Ld4Duyae6xvSMK4teVbMhfs5b17wn24xiA/exec';
 const form = document.getElementById('sheet-form');
 const submitBtn = document.getElementById('submit-btn');
 const responseMessage = document.getElementById('response-message');
@@ -24,23 +23,19 @@ const rules = {
     }
 };
 
-// Show error under a field
+// ── Show error under a field ──
 function showError(fieldId, msg) {
     const input = document.getElementById(fieldId);
     const wrapper = input.closest('.input-wrapper');
-
-    // Remove old error if any
     clearError(fieldId);
-
     input.classList.add('input-error');
-
     const err = document.createElement('span');
     err.className = 'field-error';
     err.textContent = msg;
     wrapper.after(err);
 }
 
-// Clear error for a field
+// ── Clear error for a field ──
 function clearError(fieldId) {
     const input = document.getElementById(fieldId);
     input.classList.remove('input-error');
@@ -49,15 +44,14 @@ function clearError(fieldId) {
     if (existing) existing.remove();
 }
 
-// Clear error on user input
+// ── Clear error on user input ──
 ['name', 'email', 'mobile', 'message'].forEach(id => {
     document.getElementById(id).addEventListener('input', () => clearError(id));
 });
 
-// ── Validate all fields, return true if all pass ──
+// ── Validate all fields ──
 function validateForm() {
     let isValid = true;
-
     for (const [id, rule] of Object.entries(rules)) {
         const val = document.getElementById(id).value;
         if (!rule.validate(val)) {
@@ -65,13 +59,10 @@ function validateForm() {
             isValid = false;
         }
     }
-
-    // Focus first error field
     if (!isValid) {
         const firstError = form.querySelector('.input-error');
         if (firstError) firstError.focus();
     }
-
     return isValid;
 }
 
@@ -79,26 +70,25 @@ function validateForm() {
 form.addEventListener('submit', e => {
     e.preventDefault();
 
-    // Clear global response
     responseMessage.textContent = '';
     responseMessage.className = 'response-message';
 
-    // Run validation — stop if fails
     if (!validateForm()) return;
 
-    // Set loading state
     submitBtn.disabled = true;
     submitBtn.classList.add('loading');
 
+    // ✅ formData yahan define hai
     const formData = {
-        name: document.getElementById('name').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        mobile: document.getElementById('mobile').value.trim(),
+        name:    document.getElementById('name').value.trim(),
+        email:   document.getElementById('email').value.trim(),
+        mobile:  document.getElementById('mobile').value.trim(),
         message: document.getElementById('message').value.trim()
     };
 
     fetch(scriptURL, {
         method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(formData)
     })
     .then(response => response.json())
